@@ -1,0 +1,33 @@
+<div class="max-w-3xl mx-auto p-8">
+    <h3 class="text-3xl text-purple-500 mb-5">
+        Todo List
+    </h3>
+    <div class="flex flex-row gap-3 mb-3">
+        <button (click)="changeTab(!done ? false : true)" class="{{ done ? 'bg-slate-800' : 'bg-slate-700' }} px-2 py-1 text-white rounded opacity-75">
+            Pending
+        </button>
+        <button (click)="changeTab(done ? false : true)" class="{{ !done ? 'bg-slate-800' : 'bg-slate-700' }} px-2 py-1 text-white rounded opacity-75">
+            Completed
+        </button>
+    </div>
+    <div class="mb-4">
+        <div *ngFor="let todo of selectedTodos" class="flex flex-row py-3 px-1 mb-1 text-white bg-slate-800 justify-between rounded">
+            <a (click)="toggle(todo, todo.id)" class="cursor-pointer">
+                <img src="../../assets/icons/{{ todo.status ? 'checked' : 'unchecked'}}.svg" class="px-2">
+            </a>
+            <p class="grow">{{ todo.description }}</p>
+            <a (click)="deleteTodo(todo.id)" class="cursor-pointer">
+                <img src="../../assets/icons/delete.svg" class="px-2">
+            </a>
+        </div>
+    </div>
+    <form #addTodoForm="ngForm" (ngSubmit)="addTodo(addTodoForm)">
+        <div class="flex flex-row bg-slate-800 rounded opacity-75 justify-between">
+            <img src="../../assets/icons/add.svg" alt="Add icon" class="px-2">
+            <input type="text" name="description" ngModel required placeholder="Add a task" class="text-white bg-transparent outline-none py-3 grow">
+            <button>
+                <img src="../../assets/icons/save.svg" alt="Save icon" class="px-2">
+            </button>
+        </div>
+    </form>
+</div>
